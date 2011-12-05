@@ -344,15 +344,15 @@ def basic(type='artist-radio', artist_id=None, artist=None, song_id=None, song=N
     return [Song(**util.fix(s_dict)) for s_dict in result['response']['songs']]    
 
 
-def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist_id=None, artist=None, \
+def static(type=None, artist_pick=None, variety=None, artist_id=None, artist=None, \
                     song_id=None, track_id=None, description=None, style=None, mood=None, \
-                    results=15, max_tempo=None, min_tempo=None, max_duration=None, \
+                    results=None, max_tempo=None, min_tempo=None, max_duration=None, \
                     min_duration=None, max_loudness=None, min_loudness=None, max_danceability=None, min_danceability=None, \
                     max_energy=None, min_energy=None, artist_max_familiarity=None, artist_min_familiarity=None, \
                     artist_max_hotttnesss=None, artist_min_hotttnesss=None, song_max_hotttnesss=None, song_min_hotttnesss=None, \
-                    min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=0.2, \
-                    mode=None, key=None, buckets=[], sort=None, limit=False, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
-                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=False):
+                    min_longitude=None, max_longitude=None, min_latitude=None, max_latitude=None, adventurousness=None, \
+                    mode=None, key=None, buckets=[], sort=None, limit=None, seed_catalog=None, source_catalog=None, rank_type=None, test_new_things=None,
+                    artist_start_year_after=None, artist_start_year_before=None, artist_end_year_after=None, artist_end_year_before=None,dmca=None):
     """Get a static playlist
     
     Args:
@@ -471,14 +471,12 @@ def static(type='artist', artist_pick='song_hotttnesss-desc', variety=.5, artist
     >>> 
 
     """
-    limit = str(limit).lower()
 
     if seed_catalog and isinstance(seed_catalog, catalog.Catalog):
         seed_catalog = seed_catalog.id
 
     if source_catalog and isinstance(source_catalog, catalog.Catalog):
         source_catalog = source_catalog.id
-    dmca = str(dmca).lower()
     kwargs = locals()
     kwargs['bucket'] = kwargs['buckets']
     del kwargs['buckets']
